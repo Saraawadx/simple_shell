@@ -82,7 +82,7 @@ int add_env_list(info_t *info)
 	size_t j;
 
 	for (j = 0; environ[j]; j++)
-		add_node_end(&node, environ[j], 0);
+		addNodeEnd(&node, environ[j], 0);
 	info->env = node;
 	return (0);
 }
