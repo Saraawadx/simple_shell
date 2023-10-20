@@ -76,7 +76,7 @@ list_t *addNodeEnd(list_t **head, const char *str, int num)
 
 /**
  * printList_str - functin that prints only the str element of a linked list
- * @h: pointer to first node
+ * @j: pointer to first node
  *
  * Return: size of list
  */
