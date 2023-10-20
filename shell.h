@@ -39,11 +39,11 @@ extern char **environ;
  * @str: a string
  * @next: points to the next node
  */
-typedef struct lists_str
+typedef struct list_str
 {
 	int num;
 	char *str;
-	struct liststr *next;
+	struct list_str *next;
 } list_t;
 
 /**
@@ -180,7 +180,7 @@ char *copyString(char *dest, char *src);
 char *dupString(const char *str);
 void inputString(char *str);
 int inputChar(char c);
-char **strtow(char *str, char *d);
+char **strSplit(char *str, char *s);
 char **strSplit_toWords(char *str, char s);
 int isCharChain(info_t *info, char *buff, size_t *q);
 void ifCheckChain(info_t *info, char *buff, size_t *q, size_t u, size_t len);

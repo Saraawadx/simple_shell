@@ -38,7 +38,7 @@ char **listTo_strings(list_t *head)
 		return (NULL);
 	for (u = 0; node; node = node->next, u++)
 	{
-		str = malloc(stirngLen(node->str) + 1);
+		str = malloc(stringLen(node->str) + 1);
 		if (!str)
 		{
 			for (k = 0; k < u; k++)
@@ -48,7 +48,7 @@ char **listTo_strings(list_t *head)
 		}
 
 		str = copyString(str, node->str);
-		strs[i] = str;
+		strs[u] = str;
 	}
 	strs[u] = NULL;
 	return (strs);
@@ -67,10 +67,10 @@ size_t printList(const list_t *j)
 
 	while (j)
 	{
-		inputString(convert_number(h->num, 10, 0));
+		inputString(convert_number(j->num, 10, 0));
 		inputChar(':');
 		inputChar(' ');
-		inputString(h->str ? h->str : "(nil)");
+		inputString(j->str ? j->str : "(nil)");
 		inputString("\n");
 		j = j->next;
 		u++;
@@ -92,7 +92,7 @@ list_t *nodeStarts_pre(list_t *node, char *prefix, char c)
 
 	while (node)
 	{
-		q = neddleStarts(node->str, prefix);
+		q = needleStarts(node->str, prefix);
 		if (q && ((c == -1) || (*q == c)))
 			return (node);
 		node = node->next;

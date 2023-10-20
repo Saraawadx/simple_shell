@@ -11,7 +11,7 @@ char *memFill(char *a, char v, unsigned int b)
 {
 	unsigned int u;
 
-	for (u = 0; u < n; u++)
+	for (u = 0; u < b; u++)
 		a[u] = v;
 	return (a);
 }

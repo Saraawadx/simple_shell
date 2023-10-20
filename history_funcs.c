@@ -14,13 +14,13 @@ char *get_history(info_t *info)
 	dir = get_env(info, "HOME=");
 	if (!dir)
 		return (NULL);
-	buffer = malloc(sizeof(char) * (_strlen(dir) + _strlen(HIST_FILE) + 2));
+	buffer = malloc(sizeof(char) * (stringLen(dir) + stringLen(HIST_FILE) + 2));
 	if (!buffer)
 		return (NULL);
 	buffer[0] = 0;
-	_strcpy(buffer, dir);
-	_strcat(buffer, "/");
-	_strcat(buffer, HIST_FILE);
+	copyString(buffer, dir);
+	concatStrings(buffer, "/");
+	concatStrings(buffer, HIST_FILE);
 	return (buffer);
 }
 
@@ -134,7 +134,7 @@ int renumber_history(info_t *info)
 	list_t *node_ptr = info->history;
 	int i = 0;
 
-	while (node)
+	while (node_ptr)
 	{
 		node_ptr->num = i++;
 		node_ptr = node_ptr->next;

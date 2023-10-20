@@ -23,7 +23,7 @@ int stringLen(char *a)
  * @str1: the first string
  * @str2: the second string
  *
- * Return: negative if str1 < str2, positive if str1 > str2, zero if str1 == str2
+ * Return: int
  */
 int stringComp(char *str1, char *str2)
 {

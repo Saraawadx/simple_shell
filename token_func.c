@@ -8,7 +8,7 @@
  * Return: a pointer to an array of strings, or NULL on failure
  */
 
-char **strtow(char *str, char *d)
+char **strSplit(char *str, char *s)
 {
 	int u, k, l, n, numwords = 0;
 	char **a;
@@ -87,8 +87,8 @@ char **strSplit_toWords(char *str, char s)
 			return (NULL);
 		}
 		for (n = 0; n < l; n++)
-			s[k][n] = str[u++];
-		s[k][n] = 0;
+			a[k][n] = str[u++];
+		a[k][n] = 0;
 	}
 	a[k] = NULL;
 	return (a);

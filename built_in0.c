@@ -9,9 +9,9 @@ int my_exit(info_t *info)
 {
 	int exit_check;
 
-	if (info->argv[1]) /* If there is an exit arguement */
+	if (info->argv[1])
 	{
-		exit_check = _erratoi(info->argv[1]);
+		exit_check = err_atoi(info->argv[1]);
 		if (exit_check == -1)
 		{
 			info->status = 2;
@@ -20,7 +20,7 @@ int my_exit(info_t *info)
 			_eputchar('\n');
 			return (1);
 		}
-		info->err_num = _erratoi(info->argv[1]);
+		info->err_num = err_atoi(info->argv[1]);
 		return (-2);
 	}
 	info->err_num = -1;
@@ -39,27 +39,27 @@ int my_cd(info_t *info)
 
 	s = getcwd(buffer, 1024);
 	if (!s)
-		_puts("TODO: >>getcwd failure emsg here<<\n");
+		inputString("TODO: >>getcwd failure emsg here<<\n");
 	if (!info->argv[1])
 	{
-		dirc = _getenv(info, "HOME=");
+		dirc = get_env(info, "HOME=");
 		if (!dirc)
-			chdir_rett = /* TODO: what should this be? */
-				chdir((dirc = _getenv(info, "PWD=")) ? dirc : "/");
+			chdir_rett =
+				chdir((dirc = get_env(info, "PWD=")) ? dirc : "/");
 		else
 			chdir_rett = chdir(dirc);
 	}
-	else if (_strcmp(info->argv[1], "-") == 0)
+	else if (copyString(info->argv[1], "-") == 0)
 	{
-		if (!_getenv(info, "OLDPWD="))
+		if (!get_env(info, "OLDPWD="))
 		{
-			_puts(s);
-			_putchar('\n');
+			inputString(s);
+			inputChar('\n');
 			return (1);
 		}
-		_puts(_getenv(info, "OLDPWD=")), _putchar('\n');
+		inputString(get_env(info, "OLDPWD=")), inputChar('\n');
 		chdir_rett =
-			chdir((dirc = _getenv(info, "OLDPWD=")) ? dirc : "/");
+			chdir((dirc = get_env(info, "OLDPWD=")) ? dirc : "/");
 	}
 	else
 		chdir_rett = chdir(info->argv[1]);
@@ -70,8 +70,8 @@ int my_cd(info_t *info)
 	}
 	else
 	{
-		_setenv(info, "OLDPWD", _getenv(info, "PWD="));
-		_setenv(info, "PWD", getcwd(buffer, 1024));
+		set_env(info, "OLDPWD", get_env(info, "PWD="));
+		set_env(info, "PWD", getcwd(buffer, 1024));
 	}
 	return (0);
 }
@@ -86,8 +86,8 @@ int my_help(info_t *info)
 	char **arg_arr;
 
 	arg_arr = info->argv;
-	_puts("help call works, function not implemented \n");
+	inputString("help call works, function not implemented \n");
 	if (0)
-		_puts(*arg_arr);
+		inputString(*arg_arr);
 	return (0);
 }

@@ -17,7 +17,7 @@ int shh(info_t *info, char **av)
 		clear_info(info);
 		if (interactive(info))
 			inputString("$ ");
-		einputChar(BUF_FLUSH);
+		_eputchar(BUF_FLUSH);
 		e = get_input(info);
 		if (e != -1)
 		{
@@ -47,23 +47,20 @@ int shh(info_t *info, char **av)
  * findBuiltin - funcrtion that finds a builtin command
  * @info: the parameter & return info struct
  *
- * Return: -1 if builtin not found,
- * 	0 if builtin executed successfully,
- * 	1 if builtin found but not successful,
- * 	2 if builtin signals exit()
+ * Return: int
  */
 int findBuiltin(info_t *info)
 {
-	int i, built_in_ret = -1;
+	int u, built_in_ret = -1;
 	builtin_table builtintbl[] = {
-		{"exit", _myexit},
-		{"env", _myenv},
-		{"help", _myhelp},
-		{"history", _myhistory},
-		{"setenv", _mysetenv},
-		{"unsetenv", _myunsetenv},
-		{"cd", _mycd},
-		{"alias", _myalias},
+		{"exit", my_exit},
+		{"env", my_env},
+		{"help", my_help},
+		{"history", my_history},
+		{"setenv", my_setenv},
+		{"unsetenv", my_unsetenv},
+		{"cd", my_cd},
+		{"alias", my_alias},
 		{NULL, NULL}
 	};
 
@@ -100,7 +97,7 @@ void cmdFind(info_t *info)
 	if (!l)
 		return;
 
-	path = find_path(info, _getenv(info, "PATH="), info->argv[0]);
+	path = findPath(info, get_env(info, "PATH="), info->argv[0]);
 	if (path)
 	{
 		info->path = path;
@@ -108,8 +105,8 @@ void cmdFind(info_t *info)
 	}
 	else
 	{
-		if ((interactive(info) || _getenv(info, "PATH=")
-					|| info->argv[0][0] == '/') && is_cmd(info, info->argv[0]))
+		if ((interactive(info) || get_env(info, "PATH=")
+					|| info->argv[0][0] == '/') && isExec_cmd(info, info->argv[0]))
 			cmdFork(info);
 		else if (*(info->arg) != '\n')
 		{

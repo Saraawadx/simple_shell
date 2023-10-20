@@ -57,7 +57,7 @@ char *findPath(info_t *info, char *pathstr, char *cmd)
 
 	if (!pathstr)
 		return (NULL);
-	if ((stringLen(cmd) > 2) && needleStart(cmd, "./"))
+	if ((stringLen(cmd) > 2) && needleStarts(cmd, "./"))
 	{
 		if (isExec_cmd(info, cmd))
 			return (cmd);
@@ -68,11 +68,11 @@ char *findPath(info_t *info, char *pathstr, char *cmd)
 		{
 			path = dupChars(pathstr, curr_pos, u);
 			if (!*path)
-				concatString(path, cmd);
+				concatStrings(path, cmd);
 			else
 			{
-				concatString(path, "/");
-				concatString(path, cmd);
+				concatStrings(path, "/");
+				concatStrings(path, cmd);
 			}
 			if (isExec_cmd(info, path))
 				return (path);

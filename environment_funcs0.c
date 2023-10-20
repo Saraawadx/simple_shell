@@ -7,7 +7,7 @@
  */
 int my_env(info_t *info)
 {
-	print_list_str(info->env);
+	printList_str(info->env);
 	return (0);
 }
 
@@ -25,7 +25,7 @@ char *get_env(info_t *info, const char *name)
 
 	while (node)
 	{
-		i = starts_with(node->str, name);
+		i = needleStarts(node->str, name);
 		if (i && *i)
 			return (i);
 		node = node->next;
@@ -45,7 +45,7 @@ int my_setenv(info_t *info)
 		_eputs("Incorrect number of arguements\n");
 		return (1);
 	}
-	if (_setenv(info, info->argv[1], info->argv[2]))
+	if (set_env(info, info->argv[1], info->argv[2]))
 		return (0);
 	return (1);
 }
@@ -66,7 +66,7 @@ int my_unsetenv(info_t *info)
 		return (1);
 	}
 	for (j = 1; j <= info->argc; j++)
-		_unsetenv(info, info->argv[j]);
+		unset_env(info, info->argv[j]);
 
 	return (0);
 }
