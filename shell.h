@@ -34,7 +34,7 @@ extern char **environ;
 
 
 /**
- * struct liststr - singly linked list
+ * struct list_str - singly linked list
  * @num: the number field
  * @str: a string
  * @next: points to the next node
@@ -47,7 +47,7 @@ typedef struct list_str
 } list_t;
 
 /**
- * struct passinfo - contains pseudo-arguements to pass into a function,
+ * struct information - contains pseudo-arguements to pass into a function,
  * allowing uniform prototype for function pointer struct
  * @arg: a string generated from getline containing arguements
  * @argv:an array of strings generated from arg
@@ -96,7 +96,7 @@ typedef struct information
 		0, 0, 0}
 
 /**
- * struct builtin - contains a builtin string and related function
+ * struct built_in - contains a builtin string and related function
  * @type: the builtin command flag
  * @func: the function
  */
